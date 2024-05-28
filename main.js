@@ -19,11 +19,21 @@ function mostrarMenu(nombreUsuario) {
 function capturarUsuario() {
   // Obtener el nombre del usuario evaluando que no sea un string vacío o null
   let nombreUsuario = prompt("Ingresa tu nombre: ");
-  while (nombreUsuario.trim() === "" || nombreUsuario === null) {
+  while (nombreUsuario === null || nombreUsuario.trim() === "") {
     nombreUsuario = prompt("Ingresa un nombre válido: ");
   }
 
-  return nombreUsuario;
+  return nombreUsuario.trim();
+}
+
+function mostrarTareas(tareas) {
+  // Regresa un string para poder representar las tareas registradas en forma de lista
+  let tareasRegistradas = "Tareas registradas: \n";
+  for (let i = 0; i < tareas.length; i++) {
+    tareasRegistradas += (i + 1).toString() + ". " + tareas[i] + "\n";
+  }
+
+  return tareasRegistradas;
 }
 
 let tareas = [];
@@ -31,6 +41,9 @@ let tareas = [];
 let nombreUsuario = capturarUsuario();
 let opcion = mostrarMenu(nombreUsuario);
 
+// Se usó un while true ya que las indicaciones del profesor indican
+// que el usuario no necesita dar recargar para continuar con la
+// ejecución del programa
 while (true) {
   switch (opcion) {
     case 1:
@@ -38,37 +51,33 @@ while (true) {
       if (tareas.length === 0) {
         alert("No hay tareas registradas");
       } else {
-        let tareasRegistradas = "Tareas registradas: \n";
-        for (let i = 0; i < tareas.length; i++) {
-          tareasRegistradas += (i + 1).toString() + ". " + tareas[i] + "\n";
-        }
+        let tareasRegistradas = mostrarTareas(tareas);
         alert(tareasRegistradas);
       }
       break;
     case 2:
       // Agregar tarea
       let nuevaTarea = prompt("Ingresa la tarea: ");
-      while (nuevaTarea.trim() === "") {
+      while (nuevaTarea !== null && nuevaTarea.trim() === "") {
         nuevaTarea = prompt("Ingresa la tarea: ");
       }
-      tareas.push(nuevaTarea);
-      alert("Tarea registrada con éxito");
+      if (nuevaTarea !== null) {
+        tareas.push(nuevaTarea.trim());
+        alert("Tarea registrada con éxito");
+      }
       break;
     case 3:
       // Borrar tarea
       if (tareas.length === 0) {
         alert("No hay tareas registradas");
       } else {
-        let tareasRegistradas = "Tareas registradas: \n";
-        for (let i = 0; i < tareas.length; i++) {
-          tareasRegistradas += (i + 1).toString() + ". " + tareas[i] + "\n";
-        }
+        let tareasRegistradas = mostrarTareas(tareas) + "0. Cancelar\n";
         let tareaABorrar = Number(
           prompt(tareasRegistradas + "Ingresa el número de la tarea a borrar: ")
         );
         while (
           isNaN(tareaABorrar) ||
-          tareaABorrar < 1 ||
+          tareaABorrar < 0 ||
           tareaABorrar > tareas.length
         ) {
           tareaABorrar = Number(
@@ -78,15 +87,11 @@ while (true) {
             )
           );
         }
-        let arrSinTareaBorrada = [];
-        for (let i = 0; i < tareas.length; i++) {
-          if (i !== tareaABorrar - 1) {
-            arrSinTareaBorrada.push(tareas[i]);
-          }
+
+        if (tareaABorrar !== 0) {
+          tareas.splice(tareaABorrar - 1, 1);
+          alert("Tarea borrada con éxito");
         }
-        console.log(arrSinTareaBorrada);
-        tareas = Array.from(arrSinTareaBorrada);
-        alert("Tarea borrada con éxito");
       }
       break;
     case 4:
