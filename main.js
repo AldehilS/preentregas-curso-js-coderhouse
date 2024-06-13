@@ -1,15 +1,43 @@
-function mostrarMenu(nombreUsuario) {
-  // Mostrar el menú de opciones y validar que el usuario elija una opción válida
-  const menu =
-    "\n 1. Consultar tareas \n 2. Agregar tarea \n 3. Borrar tarea \n 4. Salir \n";
+// Clase Tarea que representa una tarea con una descripción y un estado de completada
+class Tarea {
+  constructor(descripcion) {
+    this.descripcion = descripcion;
+    this.completada = false;
+  }
 
+  completar() {
+    this.completada = true;
+  }
+
+  toString() {
+    return this.descripcion + (this.completada ? " (completada)" : " (pendiente)");
+  }
+}
+
+// Mostrar el menú de opciones y validar que el usuario elija una opción válida
+function mostrarMenu(nombreUsuario) {
+  // Objeto que contiene las opciones del menú de la aplicación
+  // Permite la escalabilidad de la aplicación al poder agregar más opciones
+  // de manera ordenada.
+  const menu = {
+    0: "Salir",
+    1: "Consultar tareas",
+    2: "Agregar tarea",
+    3: "Borrar tarea",
+  };
+
+  const menuString = Object.keys(menu)
+  .map((key) => `${key}. ${menu[key]}`)
+  .join('\n');
+
+  // Mostramos el prompt con el menú formateado
   let opcionUsuario = Number(
-    prompt(nombreUsuario + "\nElige una opción: " + menu)
+    prompt(nombreUsuario + "\nElige una opción:\n" + menuString)
   );
 
-  while (isNaN(opcionUsuario) || opcionUsuario < 1 || opcionUsuario > 4) {
+  while (isNaN(opcionUsuario) || opcionUsuario < 0 || opcionUsuario > menu.length - 1) {
     opcionUsuario = Number(
-      prompt(nombreUsuario + "\nElige una opción válida: " + menu)
+      prompt(nombreUsuario + "\nElige una opción válida:\n" + menuString)
     );
   }
 
@@ -30,7 +58,7 @@ function mostrarTareas(tareas) {
   // Regresa un string para poder representar las tareas registradas en forma de lista
   let tareasRegistradas = "Tareas registradas: \n";
   for (let i = 0; i < tareas.length; i++) {
-    tareasRegistradas += (i + 1).toString() + ". " + tareas[i] + "\n";
+    tareasRegistradas += (i + 1).toString() + ". " + tareas[i].toString() + "\n";
   }
 
   return tareasRegistradas;
@@ -46,6 +74,11 @@ let opcion = mostrarMenu(nombreUsuario);
 // ejecución del programa
 while (true) {
   switch (opcion) {
+    case 0:
+      // Salir
+      alert("Hasta luego " + nombreUsuario + "!!!");
+      nombreUsuario = "";
+      break;
     case 1:
       // Consultar tareas
       if (tareas.length === 0) {
@@ -62,7 +95,8 @@ while (true) {
         nuevaTarea = prompt("Ingresa la tarea: ");
       }
       if (nuevaTarea !== null) {
-        tareas.push(nuevaTarea.trim());
+        const tarea = new Tarea(nuevaTarea.trim());
+        tareas.push(tarea);
         alert("Tarea registrada con éxito");
       }
       break;
@@ -93,11 +127,6 @@ while (true) {
           alert("Tarea borrada con éxito");
         }
       }
-      break;
-    case 4:
-      // Salir
-      alert("Hasta luego " + nombreUsuario + "!!!");
-      nombreUsuario = "";
       break;
     default:
       alert("Opción no válida!!!");
