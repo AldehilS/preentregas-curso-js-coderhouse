@@ -1,141 +1,144 @@
-// Clase Tarea que representa una tarea con una descripción y un estado de completada
-class Tarea {
-  constructor(descripcion) {
-    this.descripcion = descripcion;
-    this.completada = false;
+// Class Task that represents a task with a description and a completed state
+class Task {
+  constructor(description) {
+    this.description = description;
+    this.completed = false;
   }
 
-  completar() {
-    this.completada = true;
+  complete() {
+    this.completed = true;
   }
 
   toString() {
-    return this.descripcion + (this.completada ? " (completada)" : " (pendiente)");
+    return this.description + (this.completed ? " (completed)" : " (pending...)");
   }
 }
 
-// Mostrar el menú de opciones y validar que el usuario elija una opción válida
-function mostrarMenu(nombreUsuario) {
+// Show options menu and validate that the user chooses a valid option
+function displayMenu(userName) {
   // Objeto que contiene las opciones del menú de la aplicación
   // Permite la escalabilidad de la aplicación al poder agregar más opciones
   // de manera ordenada.
   const menu = {
-    0: "Salir",
-    1: "Consultar tareas",
-    2: "Agregar tarea",
-    3: "Borrar tarea",
+    0: "Exit",
+    1: "List tasks",
+    2: "Add task",
+    3: "Delete task",
   };
 
+  //  Format the menu object to a string
   const menuString = Object.keys(menu)
   .map((key) => `${key}. ${menu[key]}`)
   .join('\n');
 
-  // Mostramos el prompt con el menú formateado
-  let opcionUsuario = Number(
-    prompt(nombreUsuario + "\nElige una opción:\n" + menuString)
+  // Display the prompt with the formatted menu
+  let userChoice = Number(
+    prompt(userName + "\nChoose an option:\n" + menuString)
   );
 
-  while (isNaN(opcionUsuario) || opcionUsuario < 0 || opcionUsuario > menu.length - 1) {
-    opcionUsuario = Number(
-      prompt(nombreUsuario + "\nElige una opción válida:\n" + menuString)
+  while (isNaN(userChoice) || userChoice < 0 || userChoice > menu.length - 1) {
+    userChoice = Number(
+      prompt(userName + "\nChoose a valid option:\n" + menuString)
     );
   }
 
-  return opcionUsuario;
+  return userChoice;
 }
 
-function capturarUsuario() {
-  // Obtener el nombre del usuario evaluando que no sea un string vacío o null
-  let nombreUsuario = prompt("Ingresa tu nombre: ");
-  while (nombreUsuario === null || nombreUsuario.trim() === "") {
-    nombreUsuario = prompt("Ingresa un nombre válido: ");
+// Obtain the user name evaluating that it is not an empty string or null
+function requestUserName() {
+  let userInputName = prompt("Enter your name: ").trim();
+  while (userInputName === null || userInputName === "") {
+    userInputName = prompt("Enter a valid name: ").trim();
   }
 
-  return nombreUsuario.trim();
+  return userInputName;
 }
 
-function mostrarTareas(tareas) {
-  // Regresa un string para poder representar las tareas registradas en forma de lista
-  let tareasRegistradas = "Tareas registradas: \n";
-  for (let i = 0; i < tareas.length; i++) {
-    tareasRegistradas += (i + 1).toString() + ". " + tareas[i].toString() + "\n";
+// Returns a string to represent the registered tasks in a list
+function showTasks(tasks) {
+  let registeredTasks = "Registered tasks: \n";
+  for (let i = 0; i < tasks.length; i++) {
+    registeredTasks += (i + 1).toString() + ". " + tasks[i].toString() + "\n";
   }
 
-  return tareasRegistradas;
+  return registeredTasks;
 }
 
-let tareas = [];
+let tasks = [];
 
-let nombreUsuario = capturarUsuario();
-let opcion = mostrarMenu(nombreUsuario);
+let userName = requestUserName();
+let selectedOption = displayMenu(userName);
 
-// Se usó un while true ya que las indicaciones del profesor indican
-// que el usuario no necesita dar recargar para continuar con la
-// ejecución del programa
+/**
+ * It was used a while loop to keep the application running until the user
+ * chooses the option to exit. This way the user can keep using the application
+ * without having to run it again.
+ */
 while (true) {
-  switch (opcion) {
+  switch (selectedOption) {
     case 0:
-      // Salir
-      alert("Hasta luego " + nombreUsuario + "!!!");
-      nombreUsuario = "";
+      // Exit
+      alert("Goodbye " + userName + "!!!");
+      userName = "";
       break;
     case 1:
-      // Consultar tareas
-      if (tareas.length === 0) {
-        alert("No hay tareas registradas");
+      // List tasks
+      if (tasks.length === 0) {
+        alert("No tasks registered");
       } else {
-        let tareasRegistradas = mostrarTareas(tareas);
-        alert(tareasRegistradas);
+        let registeredTasks = showTasks(tasks);
+        alert(registeredTasks);
       }
       break;
     case 2:
-      // Agregar tarea
-      let nuevaTarea = prompt("Ingresa la tarea: ");
-      while (nuevaTarea !== null && nuevaTarea.trim() === "") {
-        nuevaTarea = prompt("Ingresa la tarea: ");
+      // Add task
+      let newTask = prompt("Enter the task: ").trim();
+      while (newTask !== null && newTask === "") {
+        newTask = prompt("Enter the task: ").trim();
       }
-      if (nuevaTarea !== null) {
-        const tarea = new Tarea(nuevaTarea.trim());
-        tareas.push(tarea);
-        alert("Tarea registrada con éxito");
+      if (newTask !== null) {
+        const task = new Task(newTask);
+        tasks.push(task);
+        alert("New task added successfully");
       }
       break;
     case 3:
-      // Borrar tarea
-      if (tareas.length === 0) {
-        alert("No hay tareas registradas");
+      // Delete task
+      if (tasks.length === 0) {
+        alert("No tasks registered");
       } else {
-        let tareasRegistradas = mostrarTareas(tareas) + "0. Cancelar\n";
-        let tareaABorrar = Number(
-          prompt(tareasRegistradas + "Ingresa el número de la tarea a borrar: ")
+        let registeredTasks = showTasks(tasks) + "0. Cancel\n";
+        let taskToDelete = Number(
+          prompt(registeredTasks + "Enter the number of the task to delete: ")
         );
         while (
-          isNaN(tareaABorrar) ||
-          tareaABorrar < 0 ||
-          tareaABorrar > tareas.length
+          isNaN(taskToDelete) ||
+          taskToDelete < 0 ||
+          taskToDelete > tasks.length
         ) {
-          tareaABorrar = Number(
+          taskToDelete = Number(
             prompt(
-              tareasRegistradas +
-                "Ingresa un número válido de la tarea a borrar: "
+              registeredTasks +
+                "Enter a valid number of the task to delete: "
             )
           );
         }
 
-        if (tareaABorrar !== 0) {
-          tareas.splice(tareaABorrar - 1, 1);
-          alert("Tarea borrada con éxito");
+        if (taskToDelete !== 0) {
+          tasks.splice(taskToDelete - 1, 1);
+          alert("Task deleted successfully");
         }
       }
       break;
     default:
-      alert("Opción no válida!!!");
+      alert("Not valid option!!!");
       break;
   }
 
-  if (nombreUsuario === "") {
-    nombreUsuario = capturarUsuario();
+  if (userName === "") {
+    userName = requestUserName();
   }
 
-  opcion = mostrarMenu(nombreUsuario);
+  selectedOption = displayMenu(userName);
 }
