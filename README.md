@@ -1,11 +1,11 @@
-# Entregas curso javascript coderhouse
+# JavaScript Course Deliveries - Coderhouse
 
-Aquí se encuentra el código fuente para mis entregas del curso de javascript en coderhouse. Desarrollé un programa de lista de tareas en el que se pueden agregar, enlistar y borrar tareas.
+Here is the source code for my deliveries for the JavaScript course at Coderhouse. I developed a task list program where tasks can be added, listed, and deleted.
 
-## 1ra preentrega
+## First Delivery
 
-Se creó la lógica base del programa. Mediante alerts y prompts el usuario puede acceder y modificar su lista de tareas, y se validan las entradas de usuario.
+The basic logic of the program was created. Through alerts and prompts, the user can access and modify their task list, and user inputs are validated.
 
-## 2da preentrega
+## Second Delivery
 
-Se modificó el código para reemplazar el menú principal de un string a un objeto, esto mejora la escalabilidad del código al permitir agregar y modificar opciones del menú, así como poder desplegarlo de diferentes formas (como una futura interfaz gráfica). Se modificó el código para reemplazar el array de strings de tareas por un array con objetos tarea, cada uno de estos objetos permite almacenar propiedades específicas de las tareas con el objetivo de enriquecer la información que puede ser obtenida.
+The code was modified to replace the main menu from a string to an object, improving the code's scalability by allowing menu options to be added and modified, as well as being able to display it in different ways (such as a future graphical interface). The code was also modified to replace the array of task strings with an array of task objects. Each of these objects stores specific properties of the tasks to enrich the information that can be obtained.
