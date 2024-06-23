@@ -16,9 +16,11 @@ class Task {
 
 // Show options menu and validate that the user chooses a valid option
 function displayMenu(userName) {
-  // Objeto que contiene las opciones del menú de la aplicación
-  // Permite la escalabilidad de la aplicación al poder agregar más opciones
-  // de manera ordenada.
+  /**
+   * Object that contains the options of the application menu
+   * It allows the scalability of the application by being able to add more options
+   * in an orderly manner.
+   */
   const menu = {
     0: "Exit",
     1: "List tasks",
