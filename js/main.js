@@ -44,7 +44,6 @@ function refreshTaskList() {
     const p_elements = clone.querySelectorAll("p")
     const description = p_elements[0];
     const dueDate = p_elements[1];
-    const deleteButton = clone.querySelector("button");
 
     title.innerText = `Title: ${task.title}`;
     description.innerText = `Description: ${task.description}`;
@@ -59,10 +58,11 @@ addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
   const newTaskTemplate = document.getElementById('new-task-template');
   const clone = newTaskTemplate.content.cloneNode(true);
+  clone.children[0].id = "new-task-form";
 
   document.body.insertBefore(clone, taskList);
 
-  const newTaskForm = document.querySelector("form");
+  const newTaskForm = document.querySelector("#new-task-form");
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
