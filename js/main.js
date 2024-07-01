@@ -44,6 +44,22 @@ function refreshTaskList() {
     const p_elements = clone.querySelectorAll("p")
     const description = p_elements[0];
     const dueDate = p_elements[1];
+    const deleteButton = clone.querySelector("button");
+
+    // TODO: To correctly delete the task, it is needed to validate that the title is unique
+    deleteButton.onclick = () => {
+      // Get the tasks from the local storage or an empty array
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+      // Filter the tasks to remove the task with the title of the current task
+      const newTasks = tasks.filter((t) => t.title !== task.title);
+
+      // Save the new tasks array to the local storage
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+
+      // Refresh the task list
+      refreshTaskList();
+    };
 
     title.innerText = `Title: ${task.title}`;
     description.innerText = `Description: ${task.description}`;
