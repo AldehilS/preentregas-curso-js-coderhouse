@@ -59,9 +59,13 @@ addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
   const newTaskTemplate = document.getElementById('new-task-template');
   const clone = newTaskTemplate.content.cloneNode(true);
-  const createTaskButton = clone.querySelector("button");
+  clone.id = "new-task-form";
 
-  createTaskButton.onclick = () => {
+  document.body.insertBefore(clone, taskList);
+
+  const newTaskForm = document.querySelector("form");
+  newTaskForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
     const title = document.querySelector("#task-title").value;
     const description = document.querySelector("#task-description").value;
     const dueDate = document.querySelector("#task-due-date").value;
@@ -74,19 +78,16 @@ addNewTaskButton.onclick = () => {
 
     // Save the tasks array to the local storage
     localStorage.setItem('tasks', JSON.stringify(tasks));
-
-    
-    // Remove the new task form
-    document.body.removeChild(taskList.previousElementSibling);
     
     // Enable the add new task button
     addNewTaskButton.disabled = false;
-
+    
     // Refresh the task list
     refreshTaskList();
-  };
 
-  document.body.insertBefore(clone, taskList);
+    // Remove the new task form
+    newTaskForm.remove();
+  })
 };
 
 // onClick for the delete all tasks button
