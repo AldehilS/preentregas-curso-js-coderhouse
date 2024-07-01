@@ -14,7 +14,39 @@
   <h1>Second delivery Coderhouse course</h1>
   <p>Here is the source code for my first delivery of the JavaScript course at Coderhouse.
     I developed a task list program where tasks can be added, listed, and deleted.</p>
-  <script src="./js/main.js"></script>
+  <div id="action-buttons">
+    <button>Add new task</button>
+    <button>Delete all tasks</button>
+  </div>
+
+  <div id="task-list">
+    <h2>Task List</h2>
+    <ul>
+      
+    </ul>
+  </div>
+  
+  <template id="new-task-template">
+    <form action="">
+      <label for="task-title">Title:</label>
+      <input type="text" id="task-title" name="task-title" required>
+      <label for="task-description">Description:</label>
+      <input type="text" id="task-description" name="task-description" required>
+      <label for="task-due-date">Due Date:</label>
+      <input type="date" id="task-due-date" name="task-due-date" required>
+      <button type="submit">Create task</button>
+    </form>
+  </template>
+
+  <template id="task-template">
+    <li>
+      <h3></h3>
+      <p></p>
+      <p></p>
+      <button>Delete task</button>
+    </li>
+  </template>
+  <script src="./js/main.js" type="module"></script>
 </body>
 
 </html>
