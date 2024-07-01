@@ -59,7 +59,6 @@ addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
   const newTaskTemplate = document.getElementById('new-task-template');
   const clone = newTaskTemplate.content.cloneNode(true);
-  clone.id = "new-task-form";
 
   document.body.insertBefore(clone, taskList);
 
