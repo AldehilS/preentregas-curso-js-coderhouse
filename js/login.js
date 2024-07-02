@@ -27,7 +27,6 @@ let users = localStoredUsers ? JSON.parse(localStoredUsers) : [];
 // Check if the default usernames are already in the local storage
 defaulUsers.forEach((defaultUser) => {
   const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
-  console.log(repeatedUsername);
   if (!repeatedUsername) {
     users.push(defaultUser);
   }
@@ -57,7 +56,15 @@ loginForm.addEventListener("submit", (event) => {
     window.location.href = "../index.html";
   } else {
     // If the user is not allowed, show an alert
-    // TODO: Show a message with sweet alert library instead of an alert
-    alert("Invalid username or password");
+    // TODO: Show a message with sweet alert/toastify library instead of an alert
+    const pAlert = loginForm.querySelector("p");
+
+    // If there is no alert, create a new one
+    if (!pAlert) {
+      const newp = document.createElement("p");
+      newp.innerText = "Invalid username or password";
+      newp.style.color = "red";
+      loginForm.appendChild(newp);
+    }
   }
 });
