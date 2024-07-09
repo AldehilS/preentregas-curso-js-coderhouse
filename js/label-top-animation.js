@@ -4,6 +4,11 @@ const form = document.querySelector("form");
 form.querySelectorAll("div > div").forEach((inputField) => {
     const label = inputField.querySelector("label");
     const input = inputField.querySelector("input");
+
+    // If the input has a value, move the label to the top
+    if (input.value) {
+      label.classList.add("label-top-position");
+    }
   
     // If the input is focused, move the label to the top
     input.addEventListener("focus", () => {
