@@ -7,40 +7,87 @@
   <meta name="description"
     content="Task list made with javascript. List, add and delete your tasks with this useful tool.">
   <link rel="shortcut icon" href="assets/images/tasklist.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet" />
   <link rel="stylesheet" href="styles/styles.css">
   <title>Home - Task List</title>
 </head>
 
 <body>
-  <h1>Third delivery Coderhouse course</h1>
-  <p>Here is the source code for my third delivery of the JavaScript course at Coderhouse.
-    I developed a task list program where tasks can be added, listed, and deleted.
-    <br>
-    Right now I decided to focus on functionality rather than looks, but it will have some cool styles for the final
-    delivery. 😀
-    <br>
-    <strong>Try clicking on the "Add new task" button to start creating your pending tasks.</strong>
-  </p>
-  <div id="action-buttons">
-    <button>Add new task</button>
-    <button>Delete all tasks</button>
-  </div>
 
-  <div id="task-list">
-    <h2>Task List</h2>
-    <ul>
+  <!-- <header>
+    <h1>Third delivery Coderhouse course</h1>
+    <p>Here is the source code for my third delivery of the JavaScript course at Coderhouse.
+      I developed a task list program where tasks can be added, listed, and deleted.
+      <br>
+      Right now I decided to focus on functionality rather than looks, but it will have some cool styles for the final
+      delivery. 😀
+      <br>
+      <strong>Try clicking on the "Add new task" button to start creating your pending tasks.</strong>
+    </p>
+  </header>
+  TODO crear boton about
+  -->
 
-    </ul>
-  </div>
+  <main>
+    <section class="app-container">
+      <section class="sidebar">
+        <div class="user-info">
+          <span class="material-symbols-outlined">account_circle</span>
+          <span>User Name</span>
+        </div>
+        <hr>
+        <h2>My tasks:</h2>
+        <nav>
+          <button class="button-type-2">
+            <span class="material-symbols-outlined">sunny</span>
+            <span>My Day</span>
+          </button>
+          <button class="button-type-2">
+            <span class="material-symbols-outlined">star</span>
+            <span>Important</span>
+          </button>
+          <button class="button-type-2">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span>Planned</span></button>
+          <button class="button-type-2">
+            <span class="material-symbols-outlined">task</span>
+            <span>All tasks</span>
+          </button>
+        </nav>
+      </section>
+      <section class="tasklist">
+        <div>
+          <h2>Tasklist name</h2>
+          <button>Clear list</button>
+        </div>
+        <ul>
+          
+        </ul>
+        <button>Add new task</button>
+      </section>
+    </section>
+  </main>
 
   <template id="new-task-template">
-    <form action="">
-      <label for="task-title">Title:</label>
-      <input type="text" id="task-title" name="task-title" required>
-      <label for="task-description">Description:</label>
-      <input type="text" id="task-description" name="task-description" required>
-      <label for="task-due-date">Due Date:</label>
-      <input type="date" id="task-due-date" name="task-due-date" required>
+    <form action="" class="new-task-form">
+      <div>
+        <div>
+          <label for="task-title">Title:</label>
+          <input type="text" id="task-title" name="task-title" required>
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="task-description">Description:</label>
+          <input type="text" id="task-description" name="task-description" required>
+        </div>
+      </div>
+      <div>
+        <div>
+          <label for="task-due-date">Due Date:</label>
+          <input type="date" id="task-due-date" name="task-due-date" required>
+        </div>
+      </div>
       <button type="submit">Create task</button>
     </form>
   </template>
@@ -53,6 +100,7 @@
       <button>Delete task</button>
     </li>
   </template>
+  <footer>Made by Aldehil Sánchez</footer>
   <script src="./js/main.js" type="module"></script>
 </body>
 

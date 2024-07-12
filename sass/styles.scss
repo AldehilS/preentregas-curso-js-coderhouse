@@ -1,8 +1,15 @@
 @import 'base/reset';
 
 @import 'layout/body';
+@import 'layout/header';
 @import 'layout/main';
+@import 'layout/app-container';
+@import 'layout/sidebar';
 @import 'layout/footer';
+@import 'layout/tasklist-section';
 
 @import 'components/login-register-form';
 @import 'components/button-type-1';
+@import 'components/button-type-2';
+@import 'components/user-info';
+@import 'components/new-task-form';

@@ -1,9 +1,12 @@
 import { User } from "./User.js";
+import { labelTopFormAnimation } from "./label-top-animation.js";
 
 // Get the form element, the username and password fields
 const loginForm = document.querySelector("form");
 const usernameField = loginForm.querySelector("#username");
 const passwordField = loginForm.querySelector("#password");
+
+labelTopFormAnimation(loginForm);
 
 /**
  * Due to this course doesn't include databases,
@@ -14,7 +17,7 @@ const passwordField = loginForm.querySelector("#password");
  * be added new users with the sign in form.
  */
 
-const defaulUsers = [
+const defaultUsers = [
   new User("Admin" ,"admin", "admin"),
   new User("Test User" ,"test_user", "test_password"),
 ];
@@ -25,7 +28,7 @@ const localStoredUsers = localStorage.getItem("users");
 let users = localStoredUsers ? JSON.parse(localStoredUsers) : [];
 
 // Check if the default usernames are already in the local storage
-defaulUsers.forEach((defaultUser) => {
+defaultUsers.forEach((defaultUser) => {
   const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
   if (!repeatedUsername) {
     users.push(defaultUser);

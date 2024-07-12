@@ -1,0 +1,18 @@
+.tasklist {
+  & > div {
+    height: 30%;
+    background-color: rgb(65, 65, 207);
+    position: relative;
+    h2 {
+      padding: 20px;
+      color: white;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+    }
+  }
+}

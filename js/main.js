@@ -1,9 +1,9 @@
 import { Task } from './Task.js';
 
-const taskList = document.getElementById('task-list');
-const actionButtons = document.getElementById('action-buttons');
-const addNewTaskButton = actionButtons.children[0];
-const deleteAllTasksButton = actionButtons.children[1];
+const taskList = document.querySelector(".tasklist");
+const actionButtons = taskList.querySelectorAll("button");
+const deleteAllTasksButton = actionButtons[0];
+const addNewTaskButton = actionButtons[1];
 
 // Function to display the tasks on the page
 function refreshTaskList() {
@@ -22,7 +22,7 @@ function refreshTaskList() {
     const noTasksp = document.createElement("p");
     noTasksp.innerText = "No tasks to display";
     noTasksp.id = "no-tasks";
-    taskList.appendChild(noTasksp);
+    taskList.insertBefore(noTasksp, addNewTaskButton);
     return;
   }
 
@@ -74,11 +74,10 @@ addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
   const newTaskTemplate = document.getElementById('new-task-template');
   const clone = newTaskTemplate.content.cloneNode(true);
-  clone.children[0].id = "new-task-form";
 
-  document.body.insertBefore(clone, taskList);
+  taskList.insertBefore(clone, addNewTaskButton);
 
-  const newTaskForm = document.querySelector("#new-task-form");
+  const newTaskForm = document.querySelector(".new-task-form");
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;

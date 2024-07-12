@@ -12,9 +12,40 @@ body {
   flex-direction: column;
 }
 
+header {
+  background-color: rgba(0, 0, 0, 0.3); /* Gris Oscuro */
+  color: rgb(221, 221, 221);
+  padding: 20px;
+}
+
 main {
   position: relative;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  background-color: white;
+  width: 80%;
+  height: 90%;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.sidebar {
+  border-right: 1px solid black;
+  padding: 10px;
+}
+.sidebar h2 {
+  margin: 10px;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
@@ -22,6 +53,22 @@ footer {
   color: white;
   padding: 20px;
   text-align: center;
+}
+
+.tasklist > div {
+  height: 30%;
+  background-color: rgb(65, 65, 207);
+  position: relative;
+}
+.tasklist > div h2 {
+  padding: 20px;
+  color: white;
+}
+.tasklist > div button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
 }
 
 .login-register-form {
@@ -123,6 +170,41 @@ footer {
 .button-type-1:hover {
   background-color: rgb(103, 103, 192);
   cursor: pointer;
+}
+
+.button-type-2 {
+  padding: 15px;
+  font-size: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.button-type-2 span:first-child {
+  color: dodgerblue;
+  font-variation-settings: "wght" 500;
+}
+.button-type-2 span:nth-child(2) {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.user-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.user-info span:first-child {
+  font-size: 40px;
+}
+.user-info span:nth-child(2) {
+  font-size: 24px;
+  margin-left: 10px;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=styles.css.map */

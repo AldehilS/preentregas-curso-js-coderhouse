@@ -1,10 +1,13 @@
 import { User } from "./User.js";
+import { labelTopFormAnimation } from "./label-top-animation.js";
 
 // Get the form element, the name, username and password fields
 const signInForm = document.querySelector("form");
 const nameField = signInForm.querySelector("#name");
 const usernameField = signInForm.querySelector("#username");
 const passwordField = signInForm.querySelector("#password");
+
+labelTopFormAnimation(signInForm);
 
 /**
  * Due to this course doesn't include databases,
