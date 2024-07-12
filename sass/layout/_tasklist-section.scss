@@ -3,9 +3,13 @@
     height: 30%;
     background-color: rgb(65, 65, 207);
     position: relative;
-    h2 {
+    border-radius: 0 10px 0 0;
+
+    div {
       padding: 20px;
       color: white;
+      position: absolute;
+      bottom: 0;
     }
 
     button {
