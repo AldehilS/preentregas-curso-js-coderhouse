@@ -1,5 +1,5 @@
-import { User } from "./User.js";
-import { labelTopFormAnimation } from "./label-top-animation.js";
+import { User } from "../models/User.js";
+import { labelTopFormAnimation } from "../animations/label-top-animation.js";
 
 // Get the form element, the name, username and password fields
 const signInForm = document.querySelector("form");

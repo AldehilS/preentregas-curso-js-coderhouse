@@ -1,4 +1,5 @@
-import { Task } from './Task.js';
+import { Task } from './js/models/Task.js';
+import { getTasks, saveTasks } from './js/utils/tasks-management.js';
 
 const taskList = document.querySelector(".tasklist");
 const actionButtons = taskList.querySelectorAll("button");
@@ -13,7 +14,7 @@ function refreshTaskList() {
 
   // Get the tasks from the local storage or an empty array
   // TODO: Filter the tasks by the user
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const tasks = getTasks();
   const tasksNumber = tasks.length;
   
   // If there are no tasks...
@@ -49,13 +50,13 @@ function refreshTaskList() {
     // TODO: To correctly delete the task, it is needed to validate that the title is unique
     deleteButton.onclick = () => {
       // Get the tasks from the local storage or an empty array
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const tasks = getTasks();
 
       // Filter the tasks to remove the task with the title of the current task
       const newTasks = tasks.filter((t) => t.title !== task.title);
 
       // Save the new tasks array to the local storage
-      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      saveTasks(newTasks);
 
       // Refresh the task list
       refreshTaskList();
@@ -85,13 +86,13 @@ addNewTaskButton.onclick = () => {
     const dueDate = document.querySelector("#task-due-date").value;
 
     // Get the tasks from the local storage or an empty array
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const tasks = getTasks();
 
     // Add the new task to the tasks array
     tasks.push(new Task("user", title, description, dueDate));
 
     // Save the tasks array to the local storage
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    saveTasks(tasks);
     
     // Enable the add new task button
     addNewTaskButton.disabled = false;

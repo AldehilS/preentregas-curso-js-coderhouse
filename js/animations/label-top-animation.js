@@ -1,3 +1,6 @@
+/**
+ * Animate the label to the top of the input field when the input is focused or has a value.
+ */
 export function labelTopFormAnimation(form) {
   
   // Add event listeners to the input fields to move the label to the top
