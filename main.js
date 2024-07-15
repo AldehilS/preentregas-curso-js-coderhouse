@@ -1,16 +1,21 @@
 import { Task } from './js/models/Task.js';
 import { getTasks, saveTasks } from './js/utils/tasks-management.js';
 
+// Get the main components of the page
 const taskList = document.querySelector(".tasklist");
 const actionButtons = taskList.querySelectorAll("button");
 const deleteAllTasksButton = actionButtons[0];
 const addNewTaskButton = actionButtons[1];
+const logoutButton = document.querySelector(".user-info button");
+const taskListUl = taskList.querySelector("ul");
 
 // Function to display the tasks on the page
 function refreshTaskList() {
+  const taskListHeight = taskList.clientHeight;
+
   // Clear the task list
-  const taskListUl = taskList.querySelector("ul");
   taskListUl.innerHTML = "";
+  taskListUl.style.maxHeight = `${taskListHeight * 0.6}px`;
 
   // Get the tasks from the local storage or an empty array
   // TODO: Filter the tasks by the user
@@ -70,6 +75,22 @@ function refreshTaskList() {
   });
 }
 
+// Event listener to adjust the task list max-height when the window is resized
+window.addEventListener("resize", () => {
+  // Get the new task form height and set the max height of the task list
+  const taskListHeight = taskList.clientHeight;
+  
+  let formHeight = 0;
+  const newTaskForm = document.querySelector(".new-task-form");
+  if (newTaskForm) {
+    formHeight = newTaskForm.clientHeight;
+  }
+
+  // If the new task form is displayed, adjust the max height of the task list
+  taskListUl.style.maxHeight = `${(taskListHeight * 0.6) - formHeight}px`;
+  
+});
+
 // onClick for the add new task button
 addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
@@ -79,6 +100,10 @@ addNewTaskButton.onclick = () => {
   taskList.insertBefore(clone, addNewTaskButton);
 
   const newTaskForm = document.querySelector(".new-task-form");
+  // Resize the task list to fit the new form
+  const taskListHeight = taskList.clientHeight;
+  const formHeight = newTaskForm.clientHeight;
+  taskListUl.style.maxHeight = `${(taskListHeight * 0.6) - formHeight}px`;
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
@@ -112,6 +137,14 @@ deleteAllTasksButton.onclick = () => {
 
   // Refresh the task list
   refreshTaskList();
+};
+
+// onClick for the logout button
+logoutButton.onclick = () => {
+  // Remove the authentication status from the session storage
+  sessionStorage.removeItem('authenticated');
+  // Redirect to the login page
+  window.location.href = "pages/login.html";
 };
 
 // Try to get the authentication status from the session storage
