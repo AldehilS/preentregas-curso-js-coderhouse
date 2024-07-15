@@ -1,6 +1,7 @@
 import { Task } from './js/models/Task.js';
 import { getTasks, saveTasks } from './js/utils/tasks-management.js';
 import { setTaskListMaxHeight } from './js/utils/calc-tasklist-height.js';
+import { labelTopFormAnimation } from './js/animations/label-top-animation.js';
 
 // Get the main components of the page
 const taskList = document.querySelector(".tasklist");
@@ -90,6 +91,7 @@ addNewTaskButton.onclick = () => {
   const newTaskForm = document.querySelector(".new-task-form");
   // Resize the task list max-height to fit the new form
   setTaskListMaxHeight();
+  labelTopFormAnimation(newTaskForm);
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;

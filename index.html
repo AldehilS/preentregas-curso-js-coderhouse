@@ -7,26 +7,15 @@
   <meta name="description"
     content="Task list made with javascript. List, add and delete your tasks with this useful tool.">
   <link rel="shortcut icon" href="assets/images/tasklist.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
+    rel="stylesheet" />
   <link rel="stylesheet" href="styles/styles.css">
   <title>Home - Task List</title>
 </head>
 
 <body>
 
-  <!-- <header>
-    <h1>Third delivery Coderhouse course</h1>
-    <p>Here is the source code for my third delivery of the JavaScript course at Coderhouse.
-      I developed a task list program where tasks can be added, listed, and deleted.
-      <br>
-      Right now I decided to focus on functionality rather than looks, but it will have some cool styles for the final
-      delivery. 😀
-      <br>
-      <strong>Try clicking on the "Add new task" button to start creating your pending tasks.</strong>
-    </p>
-  </header>
-  TODO crear boton about
-  -->
+  <!-- TODO crear boton about -->
 
   <main>
     <section class="app-container">
@@ -65,7 +54,7 @@
           <button class="button-type-3"><span class="material-symbols-outlined">delete</span>Clear list</button>
         </div>
         <ul>
-          
+
         </ul>
         <button class="button-type-2"><span class="material-symbols-outlined">add</span>Add new task</button>
       </section>
@@ -92,7 +81,10 @@
           <input type="date" id="task-due-date" name="task-due-date" placeholder="Due date" required>
         </div>
       </div>
-      <button type="submit">Create task</button>
+      <button type="submit" class="button-type-3">
+        <span class="material-symbols-outlined">add_task</span>
+        Create task
+      </button>
     </form>
   </template>
 

@@ -20,7 +20,8 @@ export function labelTopFormAnimation(form) {
   
     // If the input is blurred and there is no value, move the label to the initial position
     input.addEventListener("blur", () => {
-      if (!input.value) {
+      // If input type is date, the label remains on top
+      if (!input.value && input.type !== "date") {
         label.classList.remove("label-top-position");
       }
     });

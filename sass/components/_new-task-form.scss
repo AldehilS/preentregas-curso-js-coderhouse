@@ -1,21 +1,15 @@
 .new-task-form {
   padding: 20px;
-  width: 100%;
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
   & > div {
-    margin: 5px 0;
+    margin: 10px 10px 10px 0;
     height: 45px;
 
     &:nth-child(1) {
-      border: 10px solid rgba(124, 125, 255, 0.5);
-      width: 100%;
       grid-column: 1 / span 2;
-    }
-
-    &:nth-child(2), &:nth-child(3) {
-      border: 10px solid rgba(124, 125, 255, 0.5);
     }
 
     div {
@@ -53,6 +47,21 @@
             opacity: 0.5;
           }
         }
+      }
+    }
+  }
+
+  button {
+    font-size: 20px;
+    &.button-type-3 {
+      width: 50%;
+      background-color: green;
+      border-radius: 10px;
+      span {
+        padding: 5px;
+      }
+      &:hover {
+        background-color: #1b9b1b;
       }
     }
   }

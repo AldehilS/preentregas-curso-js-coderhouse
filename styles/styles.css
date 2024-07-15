@@ -274,21 +274,16 @@ footer {
 
 .new-task-form {
   padding: 20px;
-  width: 100%;
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 .new-task-form > div {
-  margin: 5px 0;
+  margin: 10px 10px 10px 0;
   height: 45px;
 }
 .new-task-form > div:nth-child(1) {
-  border: 10px solid rgba(124, 125, 255, 0.5);
-  width: 100%;
   grid-column: 1/span 2;
-}
-.new-task-form > div:nth-child(2), .new-task-form > div:nth-child(3) {
-  border: 10px solid rgba(124, 125, 255, 0.5);
 }
 .new-task-form > div div {
   position: relative;
@@ -320,6 +315,20 @@ footer {
 }
 .new-task-form > div div input:focus::placeholder {
   opacity: 0.5;
+}
+.new-task-form button {
+  font-size: 20px;
+}
+.new-task-form button.button-type-3 {
+  width: 50%;
+  background-color: green;
+  border-radius: 10px;
+}
+.new-task-form button.button-type-3 span {
+  padding: 5px;
+}
+.new-task-form button.button-type-3:hover {
+  background-color: #1b9b1b;
 }
 
 /*# sourceMappingURL=styles.css.map */
