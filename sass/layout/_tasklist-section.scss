@@ -56,12 +56,31 @@
       margin: 20px;
       border-radius: 10px;
       position: relative;
+      transition: background-color 0.3s ease-in-out 0s;
+
+      &:hover {
+        background-color: rgb(65, 143, 207, 0.8);
+        cursor: pointer;
+        button {
+          background-color: rgb(65, 143, 207, 0.8);
+        }
+      }
+
+      &:has(button:hover) {
+        background-color: rgb(65, 143, 207);
+      }
 
       button {
         position: absolute;
         top: 0;
         right: 0;
         margin: 20px;
+        border-radius: 20px;
+        background-color: transparent;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
       }
 
       p {
