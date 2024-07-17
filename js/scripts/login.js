@@ -71,11 +71,10 @@ loginForm.addEventListener("submit", (event) => {
   );
 
   if (user) {
-    sessionStorage.setItem("authenticated", user.name);
+    sessionStorage.setItem("authenticated", JSON.stringify({username: user.username, name: user.name }));
     window.location.href = "../index.html";
   } else {
     // If the user is not allowed, show an alert
-    // TODO: Show a message with sweet alert/toastify library instead of an alert
     const pAlert = loginForm.querySelector("p");
 
     // If there is no alert, create a new one

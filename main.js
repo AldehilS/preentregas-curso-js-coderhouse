@@ -22,7 +22,7 @@ if (!authenticated) {
 }
 
 // Display the username in the user info section
-userNameText.innerText = authenticated;
+userNameText.innerText = JSON.parse(authenticated).name;
 
 // Event listener to adjust the task list max-height when the window is resized
 window.addEventListener("resize", setTaskListMaxHeight);
