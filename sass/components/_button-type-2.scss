@@ -8,10 +8,15 @@
   background: none;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: rgba(30, 144, 255, 0.1);
+  }
 
   span {
     &:first-child {
-      color: dodgerblue;
+      color: rgb(30, 144, 255);
       font-variation-settings: 'wght' 500;
     }
   

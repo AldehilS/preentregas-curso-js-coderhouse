@@ -77,9 +77,13 @@ footer {
 .tasklist button.button-type-2 {
   font-weight: 600;
   color: rgb(124, 125, 255);
+  margin-left: 20px;
 }
 .tasklist button.button-type-2 span {
   color: rgb(124, 125, 255);
+}
+.tasklist button.button-type-2:hover {
+  background-color: rgba(124, 125, 255, 0.1);
 }
 .tasklist button.button-type-2:disabled {
   color: rgba(124, 125, 255, 0.5);
@@ -242,9 +246,13 @@ footer {
   background: none;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
+}
+.button-type-2:hover {
+  background-color: rgba(30, 144, 255, 0.1);
 }
 .button-type-2 span:first-child {
-  color: dodgerblue;
+  color: rgb(30, 144, 255);
   font-variation-settings: "wght" 500;
 }
 .button-type-2 span:nth-child(2) {
