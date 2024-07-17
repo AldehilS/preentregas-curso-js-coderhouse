@@ -8,13 +8,13 @@
  * @returns {Array} tasks
  */
 export function getTasks() {
-  return JSON.parse(localStorage.getItem('tasks')) || [];
+  return JSON.parse(localStorage.getItem("tasks")) || [];
 }
 
-/** 
+/**
  * Save tasks to local storage
  * @param {Array} tasks
  */
 export function saveTasks(tasks) {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }

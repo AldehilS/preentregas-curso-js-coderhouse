@@ -29,20 +29,21 @@ signInForm.addEventListener("submit", (event) => {
   // Check if the username is already in use
   const repeatedUsername = users.find((user) => user.username === username);
   if (repeatedUsername) {
-    const pAlert = signInForm.querySelector("p");
+    const pAlert = signInForm.querySelector("#p-alert");
     // If there is no alert, create a new one
     if (!pAlert) {
       const newp = document.createElement("p");
-      newp.innerText = "This username is already in use, please choose another one";
+      newp.innerText =
+        "This username is already in use, please choose another one";
       newp.style.color = "red";
-      newp.id = "alert";
-      signInForm.appendChild(newp);
+      newp.id = "p-alert";
+      signInForm.insertBefore(newp, signInForm.querySelector("button"));
     }
   } else {
     // If the username is not in use, create a new user and store it
     const user = new User(name, username, password);
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
-    window.location.href = "../index.html";
+    window.location.href = "/pages/login.html";
   }
 });

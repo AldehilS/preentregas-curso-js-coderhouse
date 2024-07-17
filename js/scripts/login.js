@@ -5,6 +5,7 @@ import { labelTopFormAnimation } from "../animations/label-top-animation.js";
 const loginForm = document.querySelector("form");
 const usernameField = loginForm.querySelector("#username");
 const passwordField = loginForm.querySelector("#password");
+const submitButton = loginForm.querySelector("button");
 
 labelTopFormAnimation(loginForm);
 
@@ -18,10 +19,12 @@ labelTopFormAnimation(loginForm);
  */
 
 // Fetch the default users from the json file
-const defaultUsers = fetch("../../assets/json/default-users.json")
+const defaultUsers = fetch("../assets/json/default-users.json")
   .then((response) => response.json())
   .then((data) => {
-    const users = data.map((user) => new User(user.name, user.username, user.password));
+    const users = data.map(
+      (user) => new User(user.name, user.username, user.password)
+    );
     return users;
   })
   .catch((error) => {
@@ -34,20 +37,23 @@ const localStoredUsers = localStorage.getItem("users");
 // If there are no users, create an empty array, otherwise parse the string
 let users = localStoredUsers ? JSON.parse(localStoredUsers) : [];
 
-defaultUsers.then(defaultUsers => {
-  // Check if the default usernames are already in the local storage
-  defaultUsers.forEach((defaultUser) => {
-    const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
-    if (!repeatedUsername) {
-      users.push(defaultUser);
-    }
+defaultUsers
+  .then((defaultUsers) => {
+    // Check if the default usernames are already in the local storage
+    defaultUsers.forEach((defaultUser) => {
+      const repeatedUsername = users.find(
+        (localStoredUser) => localStoredUser.username === defaultUser.username
+      );
+      if (!repeatedUsername) {
+        users.push(defaultUser);
+      }
+    });
+    // Store the users in the local storage
+    localStorage.setItem("users", JSON.stringify(users));
   })
-  // Store the users in the local storage
-  localStorage.setItem("users", JSON.stringify(users));
-}).catch(error => {
-  console.error("Error getting the default users", error);
-});
-
+  .catch((error) => {
+    console.error("Error getting the default users", error);
+  });
 
 // -----------------------------------------------------
 
@@ -61,25 +67,24 @@ loginForm.addEventListener("submit", (event) => {
   const password = passwordField.value;
 
   // Simulate the authentication
-  const user = users.find((user) => (
-    user.username === username && 
-      user.password === password
-  ));
+  const user = users.find(
+    (user) => user.username === username && user.password === password
+  );
 
   if (user) {
-    sessionStorage.setItem("authenticated", true);
+    sessionStorage.setItem("authenticated", JSON.stringify({username: user.username, name: user.name }));
     window.location.href = "../index.html";
   } else {
     // If the user is not allowed, show an alert
-    // TODO: Show a message with sweet alert/toastify library instead of an alert
-    const pAlert = loginForm.querySelector("p");
+    const pAlert = loginForm.querySelector("#p-alert");
 
     // If there is no alert, create a new one
     if (!pAlert) {
       const newp = document.createElement("p");
       newp.innerText = "Invalid username or password";
       newp.style.color = "red";
-      loginForm.appendChild(newp);
+      newp.id = "p-alert";
+      loginForm.insertBefore(newp, submitButton);
     }
   }
 });
