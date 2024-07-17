@@ -74,8 +74,8 @@ addNewTaskButton.onclick = () => {
 
 // onClick for the delete all tasks button
 deleteAllTasksButton.onclick = () => {
-  // Clear the local storage
-  localStorage.removeItem("tasks");
+  // Clear the tasks of the user from the local storage
+  saveTasks([], authenticatedUser.username);
 
   // Refresh the task list
   refreshTaskList(authenticatedUser.username);
