@@ -6,7 +6,6 @@
 export function getTasks(username) {
   const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
   const userTasks = allTasks.filter((task) => task.assignedUser === username);
-  console.log(userTasks);
   return userTasks;
 }
 
