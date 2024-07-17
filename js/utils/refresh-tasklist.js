@@ -1,8 +1,11 @@
 import { getTasks, saveTasks } from "./tasks-management.js";
 import { setTaskListMaxHeight } from "./calc-tasklist-height.js";
 
-// Function to display the tasks on the page
-export function refreshTaskList() {
+/** 
+ * Function to display the tasks on the page
+ * @param {string} username - The username to filter the tasks
+ */
+export function refreshTaskList(username) {
   const taskList = document.querySelector(".tasklist");
   const taskListUl = taskList.querySelector("ul");
   const deleteAllTasksButton = taskList.querySelector("div button");
@@ -15,7 +18,7 @@ export function refreshTaskList() {
 
   // Get the tasks from the local storage or an empty array
   // TODO: Filter the tasks by the user
-  const tasks = getTasks();
+  const tasks = getTasks(username);
   const tasksNumber = tasks.length;
 
   // If there are no tasks...
@@ -50,16 +53,16 @@ export function refreshTaskList() {
     // TODO: To correctly delete the task, it is needed to validate that the title is unique
     deleteButton.onclick = () => {
       // Get the tasks from the local storage or an empty array
-      const tasks = getTasks();
+      const tasks = getTasks(username);
 
       // Filter the tasks to remove the task with the title of the current task
       const newTasks = tasks.filter((t) => t.title !== task.title);
 
       // Save the new tasks array to the local storage
-      saveTasks(newTasks);
+      saveTasks(newTasks, username);
 
       // Refresh the task list
-      refreshTaskList();
+      refreshTaskList(username);
     };
 
     title.innerText = `Title: ${task.title}`;

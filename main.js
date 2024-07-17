@@ -21,8 +21,10 @@ if (!authenticated) {
   window.location.href = "pages/login.html";
 }
 
+const authenticatedUser = JSON.parse(authenticated);
+
 // Display the username in the user info section
-userNameText.innerText = JSON.parse(authenticated).name;
+userNameText.innerText = authenticatedUser.name;
 
 // Event listener to adjust the task list max-height when the window is resized
 window.addEventListener("resize", setTaskListMaxHeight);
@@ -48,19 +50,19 @@ addNewTaskButton.onclick = () => {
     const dueDate = document.querySelector("#task-due-date").value;
 
     // Get the tasks from the local storage or an empty array
-    const tasks = getTasks();
+    const tasks = getTasks(authenticatedUser.username);
 
     // Add the new task to the tasks array
-    tasks.push(new Task("user", title, description, dueDate));
+    tasks.push(new Task(authenticatedUser.username, title, description, dueDate));
 
     // Save the tasks array to the local storage
-    saveTasks(tasks);
+    saveTasks(tasks, authenticatedUser.username);
 
     // Enable the add new task button
     addNewTaskButton.disabled = false;
 
     // Refresh the task list
-    refreshTaskList();
+    refreshTaskList(authenticatedUser.username);
 
     // Remove the new task form
     newTaskForm.remove();
@@ -72,11 +74,11 @@ addNewTaskButton.onclick = () => {
 
 // onClick for the delete all tasks button
 deleteAllTasksButton.onclick = () => {
-  // Clear the local storage
-  localStorage.removeItem("tasks");
+  // Clear the tasks of the user from the local storage
+  saveTasks([], authenticatedUser.username);
 
   // Refresh the task list
-  refreshTaskList();
+  refreshTaskList(authenticatedUser.username);
 };
 
 // onClick for the logout button
@@ -88,4 +90,4 @@ logoutButton.onclick = () => {
 };
 
 // Call the function to display the tasks when the page loads
-refreshTaskList();
+refreshTaskList(authenticatedUser.username);

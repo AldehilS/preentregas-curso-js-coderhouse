@@ -1,20 +1,22 @@
 /**
- * TODO: Right now all the operations are performed on tasks of every user.
- * It is needed to permorm them only on the tasks of the authenticated user.
- *  */
-
-/**
  * Get tasks from local storage
+ * @param {String} username - The username to filter the tasks
  * @returns {Array} tasks
  */
-export function getTasks() {
-  return JSON.parse(localStorage.getItem("tasks")) || [];
+export function getTasks(username) {
+  const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const userTasks = allTasks.filter((task) => task.assignedUser === username);
+  return userTasks;
 }
 
 /**
  * Save tasks to local storage
- * @param {Array} tasks
+ * @param {Array} tasks - The tasks to save
+ * @param {String} username - The username to filter the tasks
  */
-export function saveTasks(tasks) {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+export function saveTasks(tasks, username) {
+  const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const notUserTasks = allTasks.filter((task) => task.assignedUser !== username);
+  const newTasks = [...notUserTasks, ...tasks];
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
 }
