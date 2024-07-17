@@ -44,6 +44,6 @@ signInForm.addEventListener("submit", (event) => {
     const user = new User(name, username, password);
     users.push(user);
     localStorage.setItem("users", JSON.stringify(users));
-    window.location.href = "../index.html";
+    window.location.href = "/pages/login.html";
   }
 });

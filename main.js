@@ -9,7 +9,20 @@ const taskList = document.querySelector(".tasklist");
 const actionButtons = taskList.querySelectorAll("button");
 const deleteAllTasksButton = actionButtons[0];
 const addNewTaskButton = actionButtons[1];
-const logoutButton = document.querySelector(".user-info button");
+const userInfo = document.querySelector(".user-info");
+const logoutButton = userInfo.querySelector("button");
+const userNameText = userInfo.querySelectorAll("span")[1];
+
+// Try to get the authentication status from the session storage
+const authenticated = sessionStorage.getItem("authenticated");
+
+// If the user is not authenticated, redirect to the login page
+if (!authenticated) {
+  window.location.href = "pages/login.html";
+}
+
+// Display the username in the user info section
+userNameText.innerText = authenticated;
 
 // Event listener to adjust the task list max-height when the window is resized
 window.addEventListener("resize", setTaskListMaxHeight);
@@ -73,14 +86,6 @@ logoutButton.onclick = () => {
   // Redirect to the login page
   window.location.href = "pages/login.html";
 };
-
-// Try to get the authentication status from the session storage
-const authenticated = sessionStorage.getItem("authenticated");
-
-// If the user is not authenticated, redirect to the login page
-if (!authenticated) {
-  window.location.href = "pages/login.html";
-}
 
 // Call the function to display the tasks when the page loads
 refreshTaskList();

@@ -71,7 +71,7 @@ loginForm.addEventListener("submit", (event) => {
   );
 
   if (user) {
-    sessionStorage.setItem("authenticated", true);
+    sessionStorage.setItem("authenticated", user.name);
     window.location.href = "../index.html";
   } else {
     // If the user is not allowed, show an alert
