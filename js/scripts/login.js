@@ -5,6 +5,7 @@ import { labelTopFormAnimation } from "../animations/label-top-animation.js";
 const loginForm = document.querySelector("form");
 const usernameField = loginForm.querySelector("#username");
 const passwordField = loginForm.querySelector("#password");
+const submitButton = loginForm.querySelector("button");
 
 labelTopFormAnimation(loginForm);
 
@@ -18,7 +19,7 @@ labelTopFormAnimation(loginForm);
  */
 
 // Fetch the default users from the json file
-const defaultUsers = fetch("../../assets/json/default-users.json")
+const defaultUsers = fetch("../assets/json/default-users.json")
   .then((response) => response.json())
   .then((data) => {
     const users = data.map(
@@ -75,14 +76,15 @@ loginForm.addEventListener("submit", (event) => {
     window.location.href = "../index.html";
   } else {
     // If the user is not allowed, show an alert
-    const pAlert = loginForm.querySelector("p");
+    const pAlert = loginForm.querySelector("#p-alert");
 
     // If there is no alert, create a new one
     if (!pAlert) {
       const newp = document.createElement("p");
       newp.innerText = "Invalid username or password";
       newp.style.color = "red";
-      loginForm.appendChild(newp);
+      newp.id = "p-alert";
+      loginForm.insertBefore(newp, submitButton);
     }
   }
 });
