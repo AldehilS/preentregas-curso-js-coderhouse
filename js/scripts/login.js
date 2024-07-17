@@ -21,7 +21,9 @@ labelTopFormAnimation(loginForm);
 const defaultUsers = fetch("../../assets/json/default-users.json")
   .then((response) => response.json())
   .then((data) => {
-    const users = data.map((user) => new User(user.name, user.username, user.password));
+    const users = data.map(
+      (user) => new User(user.name, user.username, user.password)
+    );
     return users;
   })
   .catch((error) => {
@@ -34,20 +36,23 @@ const localStoredUsers = localStorage.getItem("users");
 // If there are no users, create an empty array, otherwise parse the string
 let users = localStoredUsers ? JSON.parse(localStoredUsers) : [];
 
-defaultUsers.then(defaultUsers => {
-  // Check if the default usernames are already in the local storage
-  defaultUsers.forEach((defaultUser) => {
-    const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
-    if (!repeatedUsername) {
-      users.push(defaultUser);
-    }
+defaultUsers
+  .then((defaultUsers) => {
+    // Check if the default usernames are already in the local storage
+    defaultUsers.forEach((defaultUser) => {
+      const repeatedUsername = users.find(
+        (localStoredUser) => localStoredUser.username === defaultUser.username
+      );
+      if (!repeatedUsername) {
+        users.push(defaultUser);
+      }
+    });
+    // Store the users in the local storage
+    localStorage.setItem("users", JSON.stringify(users));
   })
-  // Store the users in the local storage
-  localStorage.setItem("users", JSON.stringify(users));
-}).catch(error => {
-  console.error("Error getting the default users", error);
-});
-
+  .catch((error) => {
+    console.error("Error getting the default users", error);
+  });
 
 // -----------------------------------------------------
 
@@ -61,10 +66,9 @@ loginForm.addEventListener("submit", (event) => {
   const password = passwordField.value;
 
   // Simulate the authentication
-  const user = users.find((user) => (
-    user.username === username && 
-      user.password === password
-  ));
+  const user = users.find(
+    (user) => user.username === username && user.password === password
+  );
 
   if (user) {
     sessionStorage.setItem("authenticated", true);

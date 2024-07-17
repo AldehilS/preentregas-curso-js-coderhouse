@@ -33,7 +33,8 @@ signInForm.addEventListener("submit", (event) => {
     // If there is no alert, create a new one
     if (!pAlert) {
       const newp = document.createElement("p");
-      newp.innerText = "This username is already in use, please choose another one";
+      newp.innerText =
+        "This username is already in use, please choose another one";
       newp.style.color = "red";
       newp.id = "alert";
       signInForm.appendChild(newp);

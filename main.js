@@ -1,8 +1,8 @@
-import { Task } from './js/models/Task.js';
-import { getTasks, saveTasks } from './js/utils/tasks-management.js';
-import { setTaskListMaxHeight } from './js/utils/calc-tasklist-height.js';
-import { labelTopFormAnimation } from './js/animations/label-top-animation.js';
-import { refreshTaskList } from './js/utils/refresh-tasklist.js';
+import { Task } from "./js/models/Task.js";
+import { getTasks, saveTasks } from "./js/utils/tasks-management.js";
+import { setTaskListMaxHeight } from "./js/utils/calc-tasklist-height.js";
+import { labelTopFormAnimation } from "./js/animations/label-top-animation.js";
+import { refreshTaskList } from "./js/utils/refresh-tasklist.js";
 
 // Get the main components of the page
 const taskList = document.querySelector(".tasklist");
@@ -17,7 +17,7 @@ window.addEventListener("resize", setTaskListMaxHeight);
 // onClick for the add new task button
 addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
-  const newTaskTemplate = document.getElementById('new-task-template');
+  const newTaskTemplate = document.getElementById("new-task-template");
   const clone = newTaskTemplate.content.cloneNode(true);
 
   taskList.insertBefore(clone, addNewTaskButton);
@@ -40,10 +40,10 @@ addNewTaskButton.onclick = () => {
 
     // Save the tasks array to the local storage
     saveTasks(tasks);
-    
+
     // Enable the add new task button
     addNewTaskButton.disabled = false;
-    
+
     // Refresh the task list
     refreshTaskList();
 
@@ -52,13 +52,13 @@ addNewTaskButton.onclick = () => {
 
     // Resize the task list
     setTaskListMaxHeight();
-  })
+  });
 };
 
 // onClick for the delete all tasks button
 deleteAllTasksButton.onclick = () => {
   // Clear the local storage
-  localStorage.removeItem('tasks');
+  localStorage.removeItem("tasks");
 
   // Refresh the task list
   refreshTaskList();
@@ -67,13 +67,13 @@ deleteAllTasksButton.onclick = () => {
 // onClick for the logout button
 logoutButton.onclick = () => {
   // Remove the authentication status from the session storage
-  sessionStorage.removeItem('authenticated');
+  sessionStorage.removeItem("authenticated");
   // Redirect to the login page
   window.location.href = "pages/login.html";
 };
 
 // Try to get the authentication status from the session storage
-const authenticated = sessionStorage.getItem('authenticated');
+const authenticated = sessionStorage.getItem("authenticated");
 
 // If the user is not authenticated, redirect to the login page
 if (!authenticated) {
