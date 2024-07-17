@@ -22,10 +22,12 @@ addNewTaskButton.onclick = () => {
 
   taskList.insertBefore(clone, addNewTaskButton);
 
-  const newTaskForm = document.querySelector(".new-task-form");
   // Resize the task list max-height to fit the new form
   setTaskListMaxHeight();
+
+  const newTaskForm = document.querySelector(".new-task-form");
   labelTopFormAnimation(newTaskForm);
+
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
