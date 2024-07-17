@@ -1,0 +1,23 @@
+.user-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    &:first-child {
+      font-size: 40px;
+    }
+    &:nth-child(2) {
+      font-size: 24px;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+  }
+
+  .button-type-3 {
+    margin-left: auto;
+    background: none;
+    color: black;
+  }
+}

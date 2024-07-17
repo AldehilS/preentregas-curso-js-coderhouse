@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: rgb(55, 49, 83);
+  background: linear-gradient(0deg, rgb(55, 49, 83) 25%, rgb(124, 125, 255) 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.3); /* Gris Oscuro */
+  color: rgb(221, 221, 221);
+  padding: 20px;
+}
+
+main {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  background-color: white;
+  width: 80%;
+  height: 90%;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.sidebar {
+  border-right: 1px solid black;
+  padding: 10px;
+}
+.sidebar h2 {
+  margin: 10px;
+}
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.5); /* Gris Oscuro */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.tasklist > div {
+  height: 30%;
+  background-color: rgb(65, 65, 207);
+  position: relative;
+  border-radius: 0 10px 0 0;
+  margin-bottom: 20px;
+}
+.tasklist > div div {
+  padding: 20px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+}
+.tasklist > div button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+}
+.tasklist button.button-type-2 {
+  font-weight: 600;
+  color: rgb(124, 125, 255);
+}
+.tasklist button.button-type-2 span {
+  color: rgb(124, 125, 255);
+}
+.tasklist button.button-type-2:disabled {
+  color: rgba(124, 125, 255, 0.5);
+  cursor: not-allowed;
+}
+.tasklist button.button-type-2:disabled span {
+  color: rgba(124, 125, 255, 0.5);
+}
+.tasklist p {
+  margin: 20px;
+}
+.tasklist ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+}
+.tasklist ul li {
+  background-color: rgb(65, 143, 207);
+  color: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color 0.3s ease-in-out 0s;
+}
+.tasklist ul li:hover {
+  background-color: rgba(65, 143, 207, 0.8);
+  cursor: pointer;
+}
+.tasklist ul li:hover button {
+  background-color: rgba(65, 143, 207, 0.8);
+}
+.tasklist ul li:has(button:hover) {
+  background-color: rgb(65, 143, 207);
+}
+.tasklist ul li button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: transparent;
+}
+.tasklist ul li button:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.tasklist ul li p {
+  margin: 5px 0;
+}
+
+.login-register-form {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 400px;
+  height: 450px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-register-form div {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  margin: 5px 0;
+}
+.login-register-form div span {
+  background-color: rgb(55, 49, 83);
+  color: rgb(243, 243, 243);
+  font-variation-settings: "FILL" 1, "wght" 300;
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin: 0;
+}
+.login-register-form div div {
+  background-color: rgb(84, 82, 119);
+  justify-content: center;
+  margin: 0;
+  position: relative;
+}
+.login-register-form div div label {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  translate: 0% -50%;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+  cursor: text;
+}
+.login-register-form div div label.label-top-position {
+  top: 10%;
+  font-size: 12px;
+}
+.login-register-form div div input {
+  background: none;
+  border: none;
+  color: white;
+  height: 100%;
+  font-size: 14px;
+  padding-left: 5px;
+}
+.login-register-form div div input::placeholder {
+  opacity: 0;
+}
+.login-register-form div div input:focus {
+  padding-top: 5px;
+}
+.login-register-form div div input:focus::placeholder {
+  opacity: 0.5;
+}
+.login-register-form > span:first-child {
+  font-variation-settings: "FILL" 1, "wght" 300;
+  font-size: 100px;
+  background-color: rgb(55, 49, 83);
+  border-radius: 100%;
+  color: rgb(243, 243, 243);
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  translate: 0% -50%;
+  height: fit-content;
+  margin: 0;
+}
+.login-register-form h1 {
+  margin: 20px 0;
+}
+
+.button-type-1 {
+  padding: 15px;
+  border: none;
+  background-color: rgb(55, 49, 83);
+  color: white;
+  border-radius: 10px;
+  width: 150px;
+  margin: 20px 0;
+}
+.button-type-1:hover {
+  background-color: rgb(103, 103, 192);
+  cursor: pointer;
+}
+
+.button-type-2 {
+  padding: 15px;
+  font-size: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.button-type-2 span:first-child {
+  color: dodgerblue;
+  font-variation-settings: "wght" 500;
+}
+.button-type-2 span:nth-child(2) {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.button-type-3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+}
+.button-type-3:disabled {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: gray;
+  cursor: not-allowed;
+}
+
+.user-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.user-info span:first-child {
+  font-size: 40px;
+}
+.user-info span:nth-child(2) {
+  font-size: 24px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+.user-info .button-type-3 {
+  margin-left: auto;
+  background: none;
+  color: black;
+}
+
+.new-task-form {
+  padding: 20px;
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.new-task-form > div {
+  margin: 10px 10px 10px 0;
+  height: 45px;
+}
+.new-task-form > div:nth-child(1) {
+  grid-column: 1/span 2;
+}
+.new-task-form > div div {
+  position: relative;
+  height: 100%;
+}
+.new-task-form > div div label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0%, -50%);
+  font-size: 16px;
+  cursor: text;
+  transition: all 0.3s ease-in-out;
+}
+.new-task-form > div div label.label-top-position {
+  top: -20%;
+  font-size: 15px;
+}
+.new-task-form > div div input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(124, 125, 255, 0.5);
+  border-radius: 5px;
+  font-size: 16px;
+  padding-left: 10px;
+}
+.new-task-form > div div input::placeholder {
+  opacity: 0;
+}
+.new-task-form > div div input:focus::placeholder {
+  opacity: 0.5;
+}
+.new-task-form button {
+  font-size: 20px;
+}
+.new-task-form button.button-type-3 {
+  width: 50%;
+  background-color: green;
+  border-radius: 10px;
+}
+.new-task-form button.button-type-3 span {
+  padding: 5px;
+}
+.new-task-form button.button-type-3:hover {
+  background-color: #1b9b1b;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,96 @@
+.login-register-form {
+  background-color: rgba(255, 255, 255, 0.70);
+  width: 400px;
+  height: 450px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  
+  div {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    margin: 5px 0;
+    span {
+      background-color: rgb(55, 49, 83);
+      color: rgb(243, 243, 243);
+      font-variation-settings: 'FILL' 1, 'wght' 300;
+      height: 100%;
+      aspect-ratio: 1/1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      margin: 0;
+    }
+    div {
+      background-color: rgb(84, 82, 119);
+      justify-content: center;
+      margin: 0;
+      position: relative;
+
+      label {
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        translate: 0% -50%;
+        font-size: 14px;
+        transition: all 0.3s ease-in-out;
+        cursor: text;
+
+        &.label-top-position {
+          top: 10%;
+          font-size: 12px;
+        }
+      }
+      input {
+        background:none;
+        border: none;
+        color: white;
+        height: 100%;
+        font-size: 14px;
+        padding-left: 5px;
+
+        &::placeholder {
+          opacity: 0;
+        }
+
+        &:focus {
+          padding-top: 5px;
+  
+          &::placeholder {
+            opacity: 0.5;
+          }
+        }
+      }
+
+    }
+  }
+ 
+  & > span:first-child {
+    font-variation-settings: 'FILL' 1, 'wght' 300;
+    font-size: 100px;
+    background-color: rgb(55, 49, 83);
+    border-radius: 100%;
+    color: rgb(243, 243, 243);
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    translate: 0% -50%;
+    height: fit-content;
+    margin: 0;
+  }
+
+  h1 {
+    margin: 20px 0;
+  }
+}

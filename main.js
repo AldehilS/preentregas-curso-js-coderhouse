@@ -1,19 +1,27 @@
-import { Task } from './Task.js';
+import { Task } from './js/models/Task.js';
+import { getTasks, saveTasks } from './js/utils/tasks-management.js';
+import { setTaskListMaxHeight } from './js/utils/calc-tasklist-height.js';
+import { labelTopFormAnimation } from './js/animations/label-top-animation.js';
 
-const taskList = document.getElementById('task-list');
-const actionButtons = document.getElementById('action-buttons');
-const addNewTaskButton = actionButtons.children[0];
-const deleteAllTasksButton = actionButtons.children[1];
+// Get the main components of the page
+const taskList = document.querySelector(".tasklist");
+const actionButtons = taskList.querySelectorAll("button");
+const deleteAllTasksButton = actionButtons[0];
+const addNewTaskButton = actionButtons[1];
+const logoutButton = document.querySelector(".user-info button");
+const taskListUl = taskList.querySelector("ul");
 
 // Function to display the tasks on the page
 function refreshTaskList() {
+
   // Clear the task list
-  const taskListUl = taskList.querySelector("ul");
   taskListUl.innerHTML = "";
+
+  setTaskListMaxHeight();
 
   // Get the tasks from the local storage or an empty array
   // TODO: Filter the tasks by the user
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const tasks = getTasks();
   const tasksNumber = tasks.length;
   
   // If there are no tasks...
@@ -22,7 +30,7 @@ function refreshTaskList() {
     const noTasksp = document.createElement("p");
     noTasksp.innerText = "No tasks to display";
     noTasksp.id = "no-tasks";
-    taskList.appendChild(noTasksp);
+    taskList.insertBefore(noTasksp, addNewTaskButton);
     return;
   }
 
@@ -49,13 +57,13 @@ function refreshTaskList() {
     // TODO: To correctly delete the task, it is needed to validate that the title is unique
     deleteButton.onclick = () => {
       // Get the tasks from the local storage or an empty array
-      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const tasks = getTasks();
 
       // Filter the tasks to remove the task with the title of the current task
       const newTasks = tasks.filter((t) => t.title !== task.title);
 
       // Save the new tasks array to the local storage
-      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      saveTasks(newTasks);
 
       // Refresh the task list
       refreshTaskList();
@@ -69,16 +77,21 @@ function refreshTaskList() {
   });
 }
 
+// Event listener to adjust the task list max-height when the window is resized
+window.addEventListener("resize", setTaskListMaxHeight);
+
 // onClick for the add new task button
 addNewTaskButton.onclick = () => {
   addNewTaskButton.disabled = true; // Disable the button
   const newTaskTemplate = document.getElementById('new-task-template');
   const clone = newTaskTemplate.content.cloneNode(true);
-  clone.children[0].id = "new-task-form";
 
-  document.body.insertBefore(clone, taskList);
+  taskList.insertBefore(clone, addNewTaskButton);
 
-  const newTaskForm = document.querySelector("#new-task-form");
+  const newTaskForm = document.querySelector(".new-task-form");
+  // Resize the task list max-height to fit the new form
+  setTaskListMaxHeight();
+  labelTopFormAnimation(newTaskForm);
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
@@ -86,13 +99,13 @@ addNewTaskButton.onclick = () => {
     const dueDate = document.querySelector("#task-due-date").value;
 
     // Get the tasks from the local storage or an empty array
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const tasks = getTasks();
 
     // Add the new task to the tasks array
     tasks.push(new Task("user", title, description, dueDate));
 
     // Save the tasks array to the local storage
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    saveTasks(tasks);
     
     // Enable the add new task button
     addNewTaskButton.disabled = false;
@@ -102,6 +115,9 @@ addNewTaskButton.onclick = () => {
 
     // Remove the new task form
     newTaskForm.remove();
+
+    // Resize the task list
+    setTaskListMaxHeight();
   })
 };
 
@@ -112,6 +128,14 @@ deleteAllTasksButton.onclick = () => {
 
   // Refresh the task list
   refreshTaskList();
+};
+
+// onClick for the logout button
+logoutButton.onclick = () => {
+  // Remove the authentication status from the session storage
+  sessionStorage.removeItem('authenticated');
+  // Redirect to the login page
+  window.location.href = "pages/login.html";
 };
 
 // Try to get the authentication status from the session storage

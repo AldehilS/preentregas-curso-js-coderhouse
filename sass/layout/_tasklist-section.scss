@@ -1,0 +1,91 @@
+.tasklist {
+  & > div {
+    height: 30%;
+    background-color: rgb(65, 65, 207);
+    position: relative;
+    border-radius: 0 10px 0 0;
+    margin-bottom: 20px;
+
+    div {
+      padding: 20px;
+      color: white;
+      position: absolute;
+      bottom: 0;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 20px;
+    }
+  }
+
+  button {
+    &.button-type-2 {
+      font-weight: 600;
+      color: rgba(124,125,255,1);
+      span {
+        color: rgba(124,125,255,1);
+      }
+
+      &:disabled {
+        color: rgba(124,125,255,0.5);
+        cursor: not-allowed;
+        span {
+          color: rgba(124,125,255,0.5);
+        }
+      }
+    }
+  }
+
+  p {
+    margin: 20px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+
+    li {
+      background-color: rgb(65, 143, 207);
+      color: white;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      position: relative;
+      transition: background-color 0.3s ease-in-out 0s;
+
+      &:hover {
+        background-color: rgb(65, 143, 207, 0.8);
+        cursor: pointer;
+        button {
+          background-color: rgb(65, 143, 207, 0.8);
+        }
+      }
+
+      &:has(button:hover) {
+        background-color: rgb(65, 143, 207);
+      }
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        border-radius: 20px;
+        background-color: transparent;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      p {
+        margin: 5px 0;
+      }
+    }
+  }
+}

@@ -1,38 +1,53 @@
-import { User } from "./User.js";
+import { User } from "../models/User.js";
+import { labelTopFormAnimation } from "../animations/label-top-animation.js";
 
 // Get the form element, the username and password fields
 const loginForm = document.querySelector("form");
 const usernameField = loginForm.querySelector("#username");
 const passwordField = loginForm.querySelector("#password");
 
+labelTopFormAnimation(loginForm);
+
 /**
  * Due to this course doesn't include databases,
  * or any backend service to validate the users
- * I used a hardcoded list of allowed users to simulate
+ * I used a hardcoded json of allowed default users to simulate
  * the authentication.
  * The users are stored in the local storage and there can also
  * be added new users with the sign in form.
  */
 
-const defaulUsers = [
-  new User("Admin" ,"admin", "admin"),
-  new User("Test User" ,"test_user", "test_password"),
-];
+// Fetch the default users from the json file
+const defaultUsers = fetch("../../assets/json/default-users.json")
+  .then((response) => response.json())
+  .then((data) => {
+    const users = data.map((user) => new User(user.name, user.username, user.password));
+    return users;
+  })
+  .catch((error) => {
+    console.error("Error fetching the default users", error);
+    return [];
+  });
 
 // Try to get the users from the local storage
 const localStoredUsers = localStorage.getItem("users");
 // If there are no users, create an empty array, otherwise parse the string
 let users = localStoredUsers ? JSON.parse(localStoredUsers) : [];
 
-// Check if the default usernames are already in the local storage
-defaulUsers.forEach((defaultUser) => {
-  const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
-  if (!repeatedUsername) {
-    users.push(defaultUser);
-  }
-})
-// Store the users in the local storage
-localStorage.setItem("users", JSON.stringify(users));
+defaultUsers.then(defaultUsers => {
+  // Check if the default usernames are already in the local storage
+  defaultUsers.forEach((defaultUser) => {
+    const repeatedUsername = users.find((localStoredUser) => localStoredUser.username === defaultUser.username);
+    if (!repeatedUsername) {
+      users.push(defaultUser);
+    }
+  })
+  // Store the users in the local storage
+  localStorage.setItem("users", JSON.stringify(users));
+}).catch(error => {
+  console.error("Error getting the default users", error);
+});
+
 
 // -----------------------------------------------------
 
