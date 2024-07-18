@@ -120,6 +120,18 @@ export function refreshTaskList(username, filter = "allTasks") {
       // Save the new tasks array to the local storage
       saveTasks(newTasks, username);
 
+      Toastify({
+        text: "Task deleted successfully",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "black",
+        },
+      }).showToast();
+
       // Refresh the task list
       refreshTaskList(username, filter);
     };

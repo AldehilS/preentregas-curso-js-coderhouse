@@ -11,6 +11,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+body .swal2-height-auto {
+  height: auto;
+}
 
 header {
   background-color: rgba(0, 0, 0, 0.3);
