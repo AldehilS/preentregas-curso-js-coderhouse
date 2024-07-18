@@ -79,6 +79,11 @@ addNewTaskButton.onclick = () => {
     setTaskListMaxHeight();
   };
 
+  // Set the current date in the date input field
+  const dateInput = newTaskForm.querySelector("input[type='date']");
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.value = today;
+
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
@@ -87,6 +92,16 @@ addNewTaskButton.onclick = () => {
 
     // Get the tasks from the local storage or an empty array
     const tasks = getTasks(authenticatedUser.username);
+
+    if (tasks.some((task) => task.title === title)) {
+      Swal.fire({
+        title: "Task title already exists",
+        text: "Please choose another title",
+        icon: "error",
+        heightAuto: false,
+      });
+      return;
+    }
 
     // Add the new task to the tasks array
     tasks.push(new Task(authenticatedUser.username, title, description, dueDate));
