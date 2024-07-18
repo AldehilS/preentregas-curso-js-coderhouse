@@ -4,9 +4,4 @@ body {
   background: linear-gradient(0deg, rgba(55,49,83,1) 25%, rgba(124,125,255,1) 100%);
   display: flex;
   flex-direction: column;
-
-  // To prevent visual bugs when using SweetAlert2 it is necessary to overwrite the height to auto
-  .swal2-height-auto {
-    height: auto;
-  }
 }

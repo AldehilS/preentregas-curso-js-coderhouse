@@ -125,7 +125,8 @@ deleteAllTasksButton.onclick = () => {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
-    position: "center"
+    position: "center",
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       // Clear the tasks of the user from the local storage
@@ -136,7 +137,8 @@ deleteAllTasksButton.onclick = () => {
       Swal.fire({
         title: "Deleted!",
         text: "The tasklist has been cleared.",
-        icon: "success"
+        icon: "success",
+        heightAuto: false,
       });
     }
   });
