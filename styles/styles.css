@@ -120,6 +120,16 @@ footer {
 .tasklist ul li:has(button:hover) {
   background-color: rgb(65, 143, 207);
 }
+.tasklist ul li.task-completed {
+  background-color: rgb(86, 84, 187);
+  text-decoration: line-through;
+}
+.tasklist ul li.task-completed:hover button {
+  background-color: rgb(61, 60, 131);
+}
+.tasklist ul li.task-completed:has(button:hover) {
+  background-color: rgb(86, 84, 187);
+}
 .tasklist ul li button {
   position: absolute;
   top: 0;
@@ -356,7 +366,13 @@ footer {
   padding: 5px;
 }
 .new-task-form button.button-type-3:hover {
-  background-color: #1b9b1b;
+  background-color: rgb(27, 155, 27);
+}
+.new-task-form button.button-type-3:nth-of-type(2) {
+  background-color: rgb(184, 44, 44);
+}
+.new-task-form button.button-type-3:nth-of-type(2):hover {
+  background-color: rgb(168, 13, 13);
 }
 
 /*# sourceMappingURL=styles.css.map */
