@@ -49,9 +49,12 @@ export function refreshTaskList(username) {
     const description = p_elements[0];
     const dueDate = p_elements[1];
     const deleteButton = clone.querySelector("button");
+    const cloneLi = clone.querySelector("li");
 
     // TODO: To correctly delete the task, it is needed to validate that the title is unique
-    deleteButton.onclick = () => {
+    deleteButton.onclick = (event) => {
+      event.stopPropagation();
+
       // Get the tasks from the local storage or an empty array
       const tasks = getTasks(username);
 
@@ -65,9 +68,21 @@ export function refreshTaskList(username) {
       refreshTaskList(username);
     };
 
+    // Add event listener to mark the task as completed when clicked
+    cloneLi.addEventListener("click", () => {
+      cloneLi.classList.toggle("task-completed");
+      task.toggleCompleted();
+      const newTasks = tasks.map((t) => (t.title === task.title ? task : t));
+      saveTasks(newTasks, username);
+    })
+
     title.innerText = `Title: ${task.title}`;
     description.innerText = `Description: ${task.description}`;
     dueDate.innerText = `Due date: ${task.dueDate}`;
+
+    if (task.completed) {
+      cloneLi.classList.add("task-completed");
+    }
 
     taskListUl.append(clone);
   });

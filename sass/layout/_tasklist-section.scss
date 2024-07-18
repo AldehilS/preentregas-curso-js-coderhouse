@@ -76,6 +76,21 @@
         background-color: rgb(65, 143, 207);
       }
 
+      &.task-completed {
+        background-color: rgb(86, 84, 187);
+        text-decoration: line-through;
+        &:hover {
+          button {
+            background-color: rgb(61, 60, 131);
+          
+          }
+        }
+
+        &:has(button:hover) {
+          background-color: rgb(86, 84, 187);
+        }
+      }
+
       button {
         position: absolute;
         top: 0;
