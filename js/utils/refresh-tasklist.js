@@ -11,6 +11,13 @@ export function refreshTaskList(username, filter = "allTasks") {
   const taskListUl = taskList.querySelector("ul");
   const deleteAllTasksButton = taskList.querySelector("div button");
   const addNewTaskButton = taskList.querySelector("& > button");
+  const timeTag = taskList.querySelector("time");
+  const taskListName = taskList.querySelector("div h2");
+
+  // Update timeTag with the current date
+  const today = new Date();
+  timeTag.innerText = today.toDateString();
+  timeTag.dateTime = today.toISOString();
 
   // Clear the task list
   taskListUl.innerHTML = "";
@@ -24,6 +31,7 @@ export function refreshTaskList(username, filter = "allTasks") {
   let tasksToShow = [...tasks];
   switch (filter) {
     case "myDay": // Show the tasks for today
+      taskListName.innerText = "My Day";
       tasksToShow = tasks.filter((task) => {
         const today = new Date();
         const dueDate = new Date(`${task.dueDate}T00:00:00`);
@@ -36,9 +44,11 @@ export function refreshTaskList(username, filter = "allTasks") {
       break;
     // TODO: Implement a way to mark tasks as important
     case "important": // Show tasks marked as important
+      taskListName.innerText = "Important";
       tasksToShow = tasks.filter((task) => task.important);
       break;
     case "planned": // Show tasks with a due date greater than today
+      taskListName.innerText = "Planned";
       tasksToShow = tasks.filter((task) => {
         const today = new Date();
         const dueDate = new Date(task.dueDate);
@@ -46,6 +56,7 @@ export function refreshTaskList(username, filter = "allTasks") {
       });
       break;
     default:
+      taskListName.innerText = "All Tasks";
       break;
     }
 
