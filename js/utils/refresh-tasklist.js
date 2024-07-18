@@ -4,8 +4,9 @@ import { setTaskListMaxHeight } from "./calc-tasklist-height.js";
 /** 
  * Function to display the tasks on the page
  * @param {string} username - The username to filter the tasks
+ * @param {string} filter - The filter to apply to the task list
  */
-export function refreshTaskList(username) {
+export function refreshTaskList(username, filter = "allTasks") {
   const taskList = document.querySelector(".tasklist");
   const taskListUl = taskList.querySelector("ul");
   const deleteAllTasksButton = taskList.querySelector("div button");
@@ -17,17 +18,49 @@ export function refreshTaskList(username) {
   setTaskListMaxHeight();
 
   // Get the tasks from the local storage or an empty array
-  // TODO: Filter the tasks by the user
   const tasks = getTasks(username);
-  const tasksNumber = tasks.length;
+
+  // Filter the tasks to show
+  let tasksToShow = [...tasks];
+  switch (filter) {
+    case "myDay": // Show the tasks for today
+      tasksToShow = tasks.filter((task) => {
+        const today = new Date();
+        const dueDate = new Date(`${task.dueDate}T00:00:00`);
+        return (
+          dueDate.getDate() === today.getDate() &&
+          dueDate.getMonth() === today.getMonth() &&
+          dueDate.getFullYear() === today.getFullYear()
+        );
+      });
+      break;
+    // TODO: Implement a way to mark tasks as important
+    case "important": // Show tasks marked as important
+      tasksToShow = tasks.filter((task) => task.important);
+      break;
+    case "planned": // Show tasks with a due date greater than today
+      tasksToShow = tasks.filter((task) => {
+        const today = new Date();
+        const dueDate = new Date(task.dueDate);
+        return dueDate > today;
+      });
+      break;
+    default:
+      break;
+    }
+
+  const tasksNumber = tasksToShow.length;
 
   // If there are no tasks...
   if (tasksNumber === 0) {
     deleteAllTasksButton.disabled = true; // Disable the button
-    const noTasksp = document.createElement("p");
-    noTasksp.innerText = "No tasks to display";
-    noTasksp.id = "no-tasks";
-    taskList.insertBefore(noTasksp, addNewTaskButton);
+    const noTasksp = taskList.querySelector("#no-tasks");
+    if (!noTasksp) {
+      const newp = document.createElement("p");
+      newp.innerText = "No tasks to display";
+      newp.id = "no-tasks";
+      taskList.insertBefore(newp, addNewTaskButton);
+    }
     return;
   }
 
@@ -41,7 +74,7 @@ export function refreshTaskList(username) {
   }
 
   // Create a new unordered list
-  tasks.forEach((task) => {
+  tasksToShow.forEach((task) => {
     const taskTemplate = document.getElementById("task-template");
     const clone = taskTemplate.content.cloneNode(true);
     const title = clone.querySelector("h3");
@@ -65,7 +98,7 @@ export function refreshTaskList(username) {
       saveTasks(newTasks, username);
 
       // Refresh the task list
-      refreshTaskList(username);
+      refreshTaskList(username, filter);
     };
 
     // Add event listener to mark the task as completed when clicked

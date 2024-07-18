@@ -12,6 +12,29 @@ const addNewTaskButton = actionButtons[1];
 const userInfo = document.querySelector(".user-info");
 const logoutButton = userInfo.querySelector("button");
 const userNameText = userInfo.querySelectorAll("span")[1];
+const sidebar = document.querySelector(".sidebar");
+const sidebarButtons = sidebar.querySelectorAll("nav button");
+const myDayButton = sidebarButtons[0];
+const importantButton = sidebarButtons[1];
+const plannedButton = sidebarButtons[2];
+const allTasksButton = sidebarButtons[3];
+
+// Variable to store the current filter applied to the task list
+let currentFilter = "allTasks";
+
+/**
+ * Function to handle the sidebar buttons click applying the filter to the task list
+ * @param {HTMLButtonElement} button - The sidebar button
+ * @param {String} filter - The filter to apply to the task list
+ */
+function handleSidebarButtonClick(button, filter = "allTasks") {
+  button.onclick = () => {
+    sidebarButtons.forEach((button) => button.classList.remove("selected"));
+    button.classList.add("selected");
+    refreshTaskList(authenticatedUser.username, filter);
+    currentFilter = filter;
+  }
+}
 
 // Try to get the authentication status from the session storage
 const authenticated = sessionStorage.getItem("authenticated");
@@ -75,7 +98,7 @@ addNewTaskButton.onclick = () => {
     addNewTaskButton.disabled = false;
 
     // Refresh the task list
-    refreshTaskList(authenticatedUser.username);
+    refreshTaskList(authenticatedUser.username, currentFilter);
 
     // Remove the new task form
     newTaskForm.remove();
@@ -98,7 +121,7 @@ deleteAllTasksButton.onclick = () => {
   saveTasks([], authenticatedUser.username);
 
   // Refresh the task list
-  refreshTaskList(authenticatedUser.username);
+  refreshTaskList(authenticatedUser.username, currentFilter);
 };
 
 // onClick for the logout button
@@ -109,5 +132,11 @@ logoutButton.onclick = () => {
   window.location.href = "pages/login.html";
 };
 
+// onClick for the sidebar buttons
+handleSidebarButtonClick(myDayButton, "myDay");
+handleSidebarButtonClick(importantButton, "important");
+handleSidebarButtonClick(plannedButton, "planned");
+handleSidebarButtonClick(allTasksButton);
+
 // Call the function to display the tasks when the page loads
-refreshTaskList(authenticatedUser.username);
+refreshTaskList(authenticatedUser.username, currentFilter);
