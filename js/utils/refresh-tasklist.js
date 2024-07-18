@@ -69,6 +69,13 @@ export function refreshTaskList(username, filter = "allTasks") {
     return;
   }
 
+  // Sort the tasks by due date in ascending order
+  tasksToShow.sort((a, b) => {
+    const dateA = new Date(`${a.dueDate}T00:00:00`);
+    const dateB = new Date(`${b.dueDate}T00:00:00`);
+    return dateA - dateB;
+  });
+
   // Enable the delete all tasks button
   deleteAllTasksButton.disabled = false;
 
