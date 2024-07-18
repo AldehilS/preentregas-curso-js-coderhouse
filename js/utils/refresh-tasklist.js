@@ -56,9 +56,14 @@ export function refreshTaskList(username, filter = "allTasks") {
     deleteAllTasksButton.disabled = true; // Disable the button
     const noTasksp = taskList.querySelector("#no-tasks");
     if (!noTasksp) {
+      const newTaskForm = taskList.querySelector(".new-task-form");
       const newp = document.createElement("p");
       newp.innerText = "No tasks to display";
       newp.id = "no-tasks";
+      if (newTaskForm) {
+        taskList.insertBefore(newp, newTaskForm);
+        return;
+      }
       taskList.insertBefore(newp, addNewTaskButton);
     }
     return;
