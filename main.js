@@ -117,11 +117,32 @@ addNewTaskButton.onclick = () => {
 
 // onClick for the delete all tasks button
 deleteAllTasksButton.onclick = () => {
-  // Clear the tasks of the user from the local storage
-  saveTasks([], authenticatedUser.username);
+  Swal.fire({
+    title: "Are you sure yout want to clear this tasklist?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+    position: "center",
+    heightAuto: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Clear the tasks of the user from the local storage
+      saveTasks([], authenticatedUser.username);
+    
+      // Refresh the task list
+      refreshTaskList(authenticatedUser.username, currentFilter);
+      Swal.fire({
+        title: "Deleted!",
+        text: "The tasklist has been cleared.",
+        icon: "success",
+        heightAuto: false,
+      });
+    }
+  });
 
-  // Refresh the task list
-  refreshTaskList(authenticatedUser.username, currentFilter);
 };
 
 // onClick for the logout button
