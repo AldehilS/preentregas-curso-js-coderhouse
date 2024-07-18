@@ -43,6 +43,19 @@ addNewTaskButton.onclick = () => {
   const newTaskForm = document.querySelector(".new-task-form");
   labelTopFormAnimation(newTaskForm);
 
+  // onClick for the cancel button
+  const cancelButton = newTaskForm.querySelector("button:nth-of-type(2)");
+  cancelButton.onclick = () => {
+    // Enable the add new task button
+    addNewTaskButton.disabled = false;
+
+    // Remove the new task form
+    newTaskForm.remove();
+
+    // Resize the task list
+    setTaskListMaxHeight();
+  };
+
   newTaskForm?.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = document.querySelector("#task-title").value;
@@ -70,6 +83,13 @@ addNewTaskButton.onclick = () => {
     // Resize the task list
     setTaskListMaxHeight();
   });
+
+  /**
+   * There is an issue with smallers screens, the task list is not resized correctly
+   * due to an imperceptible overflow that changes the height of the tasklist section for an instant,
+   * so it is needed to resize the task list again to avoid this issue.
+   */
+  setTaskListMaxHeight();
 };
 
 // onClick for the delete all tasks button
